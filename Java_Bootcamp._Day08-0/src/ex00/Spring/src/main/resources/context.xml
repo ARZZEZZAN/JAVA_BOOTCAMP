@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config />
+    <context:component-scan base-package="edu.school21.springApp" />
+
+    <bean id="process1"
+          class="edu.school21.springApp.Processor.PreProcessorToLower">
+    </bean>
+    <bean id="process2"
+          class="edu.school21.springApp.Processor.PreProcessorToUpperImpl">
+    </bean>
+
+
+    <bean id="rendererErrImpl1"
+          class="edu.school21.springApp.Renderer.RendererErrImpl">
+        <constructor-arg name="processor" ref="process1"/>
+    </bean>
+    <bean id="rendererErrImpl2"
+          class="edu.school21.springApp.Renderer.RendererErrImpl">
+        <constructor-arg name="processor" ref="process2"/>
+    </bean>
+
+    <bean id="rendererStandardImpl1"
+          class="edu.school21.springApp.Renderer.RendererStandardImpl">
+        <constructor-arg name="processor" ref="process1"/>
+    </bean>
+    <bean id="rendererStandardImpl2"
+          class="edu.school21.springApp.Renderer.RendererStandardImpl">
+        <constructor-arg name="processor" ref="process2"/>
+    </bean>
+
+
+    <bean id="printerDate1"
+          class="edu.school21.springApp.Printer.PrinterWithDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererErrImpl1"/>
+    </bean>
+    <bean id="printerDate2"
+          class="edu.school21.springApp.Printer.PrinterWithDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererErrImpl2"/>
+    </bean>
+    <bean id="printerDate3"
+          class="edu.school21.springApp.Printer.PrinterWithDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererStandardImpl1"/>
+    </bean>
+    <bean id="printerDate4"
+          class="edu.school21.springApp.Printer.PrinterWithDateTimeImpl">
+        <constructor-arg name="renderer" ref="rendererStandardImpl2"/>
+    </bean>
+
+
+    <bean id="printerPref1"
+          class="edu.school21.springApp.Printer.PrinterWithPrefixImpl">
+        <constructor-arg name="renderer" ref="rendererErrImpl1"/>
+    </bean>
+    <bean id="printerPref2"
+          class="edu.school21.springApp.Printer.PrinterWithPrefixImpl">
+        <constructor-arg name="renderer" ref="rendererErrImpl2"/>
+    </bean>
+    <bean id="printerPref3"
+          class="edu.school21.springApp.Printer.PrinterWithPrefixImpl">
+        <constructor-arg name="renderer" ref="rendererStandardImpl1"/>
+    </bean>
+    <bean id="printerPref4"
+          class="edu.school21.springApp.Printer.PrinterWithPrefixImpl">
+        <constructor-arg name="renderer" ref="rendererStandardImpl2"/>
+    </bean>
+</beans>
